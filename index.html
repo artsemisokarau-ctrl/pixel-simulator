@@ -3085,4 +3085,80 @@ function zfApply(){const z=ZF&&DEV=='d11f';document.body.classList.toggle('zf',z
 const _s=setDev;setDev=function(d,o){_s(d,o);zfApply()};
 zfApply();
 })();
+// ===== MEGA PACK 22: more phones (Pixel 10 Pro, Galaxy S26 Ultra, OnePlus 13, Nothing Phone (3) with Glyph lights, Xiaomi 15 Ultra) + Gemini button with the glowing-edge animation =====
+(function(){
+const SKS={
+ p10:{n:'Pixel 10 Pro',s:'Google · Pixelsnap',info:'Under-display ultrasonic fingerprint · 6.3" · Tensor G5 · Pixelsnap magnets',logo:'G',back:'linear-gradient(160deg,#d3d4c8,#a9aa9c)',fr:['#c9cabe','#8a8b7e'],boot:'',w:360,h:780,r:56},
+ s26:{n:'Galaxy S26 Ultra',s:'Samsung · S Pen',info:'Under-display ultrasonic fingerprint · 6.9" · Snapdragon 8 Elite · S Pen',logo:'SAMSUNG',back:'linear-gradient(160deg,#a3a7af,#6d7179 60%,#585c63)',fr:['#c0c3ca','#7c8087'],boot:'SAMSUNG',w:358,h:784,r:30},
+ op13:{n:'OnePlus 13',s:'Hasselblad camera',info:'Under-display fingerprint · 6.82" · Snapdragon 8 Elite · Hasselblad',logo:'ONEPLUS',back:'linear-gradient(160deg,#245443,#10281f 70%)',fr:['#5a6b62','#2a342f'],boot:'ONEPLUS',w:360,h:782,r:46},
+ n3:{n:'Nothing Phone (3)',s:'Glyph lights',info:'Under-display fingerprint · 6.67" · Snapdragon 8s Gen 4 · Glyph interface',logo:'nothing',back:'linear-gradient(160deg,#eff0f2,#d3d6da)',fr:['#e8e9eb','#a5a8ad'],boot:'NOTHING',w:358,h:778,r:44},
+ x15:{n:'Xiaomi 15 Ultra',s:'Leica camera',info:'Under-display ultrasonic fingerprint · 6.73" · Snapdragon 8 Elite · Leica',logo:'Xiaomi',back:'linear-gradient(160deg,#2a2b30,#0f1012)',fr:['#7a7c82','#3a3b3f'],boot:'Xiaomi',w:362,h:786,r:40}
+};
+let SK='';try{SK=localStorage.getItem('sk')||''}catch(e){}if(!SKS[SK])SK='';
+let css='';for(const[k,v]of Object.entries(SKS)){const c=`.sk-${k}`;
+ css+=`${c} .ph{width:${v.w}px;height:${v.h}px;border-radius:${v.r}px;box-shadow:0 0 0 3px ${v.fr[0]},0 0 0 5px ${v.fr[1]},0 40px 80px #000a!important}${c} .scr{border-radius:${v.r-10}px}${c} .btn{background:${v.fr[0]}!important}${c} .back{background:${v.back}!important}${c} .skc.${k}{display:block}${k=='p10'?'':`${c} .v9{display:none}`}
+${c} .back .logo{color:${k=='n3'?'#222':'#fff'};opacity:.7;letter-spacing:.2em;font-size:${v.logo.length>2?16:30}px;font-weight:600}${c} .back .breg{color:${k=='n3'?'#000':'#fff'}}
+${v.boot?`${c} #boot svg{display:none}${c} #boot:before{content:"${v.boot}";color:#fff;font-weight:700;letter-spacing:.34em;font-size:20px;margin-bottom:6px}`:''}`}
+css+=`.skc{display:none;inset:0}
+.skc .ring{position:absolute;border-radius:50%}
+.skc.s26 .lens{width:46px;height:46px}.skc.s26 .lens.sm{width:30px;height:30px}
+.skc.op13 .disc{left:22px;top:24px;width:164px;height:164px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#3a3d42,#0b0c0e 70%);box-shadow:0 0 0 4px #7c828b,0 0 0 7px #d9822b,0 10px 22px #000b,inset 0 0 20px #000}
+.skc.op13 .lens{width:56px;height:56px}
+.skc.n3 .pill{left:24px;top:24px;width:158px;height:88px;border-radius:44px;background:linear-gradient(#c5c8cd,#a7abb1);box-shadow:0 6px 14px #0006,inset 0 1px 0 #fff9}
+.skc.n3 .lens{width:58px;height:58px}
+.skc.n3 .coil{left:50%;top:46%;width:150px;height:150px;margin:-75px;border-radius:50%;border:2px solid #b9bcc2;box-shadow:inset 0 0 0 10px #ffffff40,inset 0 0 0 11px #b9bcc2}
+.skc.n3 .scrw{width:7px;height:7px;border-radius:50%;background:radial-gradient(#fff,#8b8e94);box-shadow:0 1px 1px #0005}
+.gly{background:#aeb2b9;border-radius:6px;box-shadow:inset 0 1px 2px #0004}
+.sk-n3 .gly.on{animation:gly .9s both}
+@keyframes gly{30%,60%{background:#fff;box-shadow:0 0 12px 5px #7fb2ff,0 0 26px 8px #7fb2ff88}}
+.skc.x15 .disc{left:50%;top:34px;width:206px;height:206px;margin-left:-103px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#2f3136,#08090a 72%);box-shadow:0 0 0 5px #9a9da4,0 0 0 8px #2a2b2f,0 0 0 9px #c9ccd2,0 12px 26px #000c,inset 0 0 24px #000}
+.skc.x15 .disc:after{content:"LEICA VARIO-SUMMILUX 1:1.63-2.5/14-70 ASPH";position:absolute;inset:7px;font-size:6px;letter-spacing:.14em;color:#ccd;opacity:.5;text-align:center;line-height:192px;border-radius:50%}
+.skc.x15 .lens{width:106px;height:106px}.skc.x15 .lens.sm{width:44px;height:44px}
+#gembtn{position:fixed;top:14px;right:106px;z-index:1001;width:40px;height:40px;border-radius:50%;border:0;background:#ffffff26;backdrop-filter:blur(10px);display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 14px #0004;transition:transform .2s}
+#gembtn:hover{transform:scale(1.1) rotate(15deg)}#gembtn svg{width:22px}
+@media(max-width:760px),(pointer:coarse) and (max-width:1000px){#gembtn{display:none}}
+@property --ga{syntax:'<angle>';initial-value:0deg;inherits:false}
+#gemfx{position:absolute;inset:0;z-index:97;pointer-events:none;opacity:0;border-radius:inherit}
+#gemfx.on{animation:gemfxa 4.6s ease-out both}
+#gemfx:before{content:"";position:absolute;inset:0;border-radius:inherit;padding:6px;background:conic-gradient(from var(--ga),#4285f4,#9b72cb,#d96570,#fbbc05,#34a853,#4285f4);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);filter:blur(4px);animation:gemspin 2.2s linear infinite}
+#gemfx:after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 70px #9b72cb88,inset 0 0 22px #4285f4aa}
+@keyframes gemspin{to{--ga:360deg}}
+@keyframes gemfxa{0%{opacity:0;transform:scale(1.06)}10%{opacity:1;transform:none}82%{opacity:1}100%{opacity:0}}
+#gemp{position:absolute;left:50%;bottom:92px;transform:translate(-50%,30px);z-index:98;display:flex;align-items:center;gap:10px;padding:11px 18px;border-radius:26px;background:#1b1b21ee;color:#fff;font-size:14px;box-shadow:0 10px 30px #000a;opacity:0;pointer-events:none;transition:.4s cubic-bezier(.3,1.3,.5,1);white-space:nowrap}
+#gemp.on{opacity:1;transform:translate(-50%,0)}#gemp svg{width:20px;animation:gsp 1.6s linear infinite}@keyframes gsp{to{transform:rotate(360deg)}}`;
+const st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
+// ---- cameras on the back ----
+const L=(l,t,cl)=>`<div class="lens ${cl||''}" style="left:${l}px;top:${t}px"></div>`;
+const FL=(l,t)=>`<div class="fl" style="left:${l}px;top:${t}px;width:12px;height:12px"></div>`;
+const glyphs=[[196,30,8,60],[196,100,8,40],[196,150,8,32]].map(([l,t,w,h])=>`<div class="gly" style="left:${l}px;top:${t}px;width:${w}px;height:${h}px"></div>`).join('')+'<div class="gly" style="left:60px;bottom:96px;width:70px;height:8px"></div><div class="gly" style="right:60px;bottom:96px;width:70px;height:8px"></div><div class="gly" style="left:50%;margin-left:-4px;bottom:150px;width:8px;height:44px"></div>';
+document.querySelector('.back').insertAdjacentHTML('beforeend',
+`<div class="skc s26">${L(26,28)}${L(26,88)}${L(26,148)}${L(86,34,'sm')}${L(86,78,'sm')}${FL(96,126)}</div>
+<div class="skc op13"><div class="disc"></div><div style="left:22px;top:24px;width:164px;height:164px">${L(10,14)}${L(94,14)}${L(52,86)}${FL(120,100)}</div></div>
+<div class="skc n3"><div class="coil"></div><div class="pill"></div>${L(36,38)}${L(106,38)}${FL(172,64)}${glyphs}<div class="scrw" style="left:40px;top:300px"></div><div class="scrw" style="right:40px;top:300px"></div><div class="scrw" style="left:40px;bottom:140px"></div><div class="scrw" style="right:40px;bottom:140px"></div></div>
+<div class="skc x15"><div class="disc"></div>${L(77,53)}${L(190,64,'sm')}${L(78,160,'sm')}${L(168,176,'sm')}${FL(60,38)}</div>`);
+// ---- device cards ----
+const grid=document.querySelector('.devgrid'),base=document.querySelector('.dev[data-d="d9"]');
+const cards={};for(const[k,v]of Object.entries(SKS)){const c=base.cloneNode(true);c.dataset.sk=k;c.dataset.n=v.n;c.querySelector('b').textContent=v.n;c.querySelector('small').textContent=v.s;c.classList.remove('on');grid.appendChild(c);cards[k]=c;
+ c.onclick=()=>{SK=k;try{localStorage.setItem('sk',k)}catch(e){}if(DEV=='d9')skApply();setDev('d9')}}
+document.querySelectorAll('.dev:not([data-sk])').forEach(e=>{const o=e.onclick;e.onclick=()=>{if(e.dataset.d!='d9'||1){SK='';try{localStorage.setItem('sk','')}catch(x){}}o&&o()}});
+function skApply(){const z=DEV=='d9'&&SK?SKS[SK]:null;[...document.body.classList].filter(c=>c.startsWith('sk-')).forEach(c=>document.body.classList.remove(c));if(z)document.body.classList.add('sk-'+SK);
+ DN.d9=z?z.n:'Pixel 9 Pro';INFO.d9=z?z.info:'Under-display ultrasonic fingerprint · 6.3" · Tensor G4';
+ if(DEV=='d9'){document.title=DN.d9+' Sim';$('dinfo').textContent=INFO.d9;if(z){const l=$('blogo');l.textContent=z.logo;l.style.fontSize=(z.logo.length>2?16:30)+'px'}}
+ document.querySelectorAll('.dev').forEach(e=>{if(e.dataset.d=='d9')e.classList.toggle('on',z?e.dataset.sk==SK:!e.dataset.sk)})}
+const _s=setDev;setDev=function(d,o){_s(d,o);skApply()};skApply();
+// ---- Nothing Glyph lights ----
+function glyph(){if(SK!='n3'||DEV!='d9')return;document.querySelectorAll('.gly').forEach((g,i)=>{g.classList.remove('on');void g.offsetWidth;g.style.animationDelay=(i*.12)+'s';g.classList.add('on')})}
+const _hu=hu;hu=function(o){_hu(o);if(o)glyph()};const _ch=charge;charge=function(){_ch();glyph()};
+setInterval(()=>{if(SK=='n3'&&Math.random()<.04)glyph()},3000);
+// ---- Gemini button ----
+const scr=document.querySelector('.scr'),fx=document.createElement('div');fx.id='gemfx';scr.appendChild(fx);
+const GS='<svg viewBox="0 0 24 24"><defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4285f4"/><stop offset=".5" stop-color="#9b72cb"/><stop offset="1" stop-color="#d96570"/></linearGradient></defs><path fill="url(#gg)" d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg>';
+const pill=document.createElement('div');pill.id='gemp';pill.innerHTML=GS+'<span>Gemini is listening…</span>';scr.appendChild(pill);
+const gb=document.createElement('button');gb.id='gembtn';gb.title='Gemini';gb.innerHTML=GS;document.body.appendChild(gb);
+function gemini(){if(state!='home'&&state!='lock'){toast('Wake the phone first');return}fx.classList.remove('on');void fx.offsetWidth;fx.classList.add('on');pill.classList.add('on');
+ try{tone(660,.1,'sine',.07);setTimeout(()=>tone(990,.14,'sine',.07),110);setTimeout(()=>tone(1320,.2,'sine',.06),230)}catch(e){}try{navigator.vibrate&&navigator.vibrate([15,40,15])}catch(e){}
+ setTimeout(()=>{try{voice()}catch(e){}},700);setTimeout(()=>pill.classList.remove('on'),4200)}
+gb.onclick=gemini;window.gemini=gemini;
+const mb=document.getElementById('mbar');if(mb){const b=document.createElement('button');b.id='bgm';b.innerHTML=GS;b.onclick=gemini;mb.insertBefore(b,document.getElementById('bpw'))}
+})();
 </script></body></html>
