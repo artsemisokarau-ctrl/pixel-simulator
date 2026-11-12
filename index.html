@@ -2991,4 +2991,32 @@ const _a=apply3D;apply3D=function(){_a();if(!isMob())return;const w=document.que
  const f=Math.min(1,avail/(need*parseFloat(m[1])));if(f<1)w.style.transform=w.style.transform.replace(/scale\([\d.]+\)/,'scale('+(parseFloat(m[1])*f)+')')};
 window.addEventListener('resize',()=>apply3D());apply3D();
 })();
+// ===== MEGA PACK 17: phone version = OS only (full screen) + on-screen volume/power keys; always-on display after a page reload =====
+(function(){
+const MQ='(max-width:760px),(pointer:coarse) and (max-width:1000px)';
+const c=document.createElement('style');c.textContent=`
+#mkeys{display:none}
+@media ${MQ}{
+ .wrap{transform:none!important;left:0!important;top:0!important;width:100vw;height:100dvh;perspective:none!important}
+ .ph{width:100vw!important;height:100dvh!important;border-radius:0!important;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)!important;box-shadow:none!important;background:#000!important;transform:none!important;outline:0!important}
+ .scr{border-radius:0!important}
+ .back,.ph>.sl,.ph>.eg,.ph>.slit,.ph>.btn,.ph>.simt,.ph>.spin,.scr .cam,#v3d,#bell,#spbtn,#tlb{display:none!important}
+ #mkeys{display:flex;flex-direction:column;gap:10px;position:fixed;right:8px;top:36%;z-index:1002}
+ #mkeys button{width:44px;height:44px;border-radius:50%;border:0;background:#ffffff2e;color:#fff;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 2px 10px #0005,inset 0 0 0 1px #ffffff30;display:grid;place-items:center;padding:0;touch-action:manipulation}
+ #mkeys button:active{background:#ffffff66;transform:scale(.92)}
+ #mkeys svg{width:22px;fill:#fff;filter:drop-shadow(0 1px 2px #0008)}
+}`;document.head.appendChild(c);
+const k=document.createElement('div');k.id='mkeys';
+const sv=p=>`<svg viewBox="0 0 24 24"><path d="${p}"/></svg>`;
+k.innerHTML=`<button id="mvu" title="Volume up">${sv('M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z')}</button><button id="mvd" title="Volume down">${sv('M18.5 12A4.5 4.5 0 0 0 16 8v8a4.47 4.47 0 0 0 2.5-4zM5 9v6h4l5 5V4L9 9H5z')}</button><button id="mpw" title="Power (hold for the power menu)">${sv('M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z')}</button>`;
+document.body.appendChild(k);
+$('mvu').onclick=()=>vol(1);$('mvd').onclick=()=>vol(-1);
+const pw=$('pwr');let held=0;
+$('mpw').addEventListener('pointerdown',e=>{e.preventDefault();held=1;pw.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true}))});
+const up=()=>{if(!held)return;held=0;pw.dispatchEvent(new PointerEvent('pointerup',{bubbles:true}));pw.click()};
+$('mpw').addEventListener('pointerup',up);$('mpw').addEventListener('pointercancel',up);$('mpw').addEventListener('contextmenu',e=>e.preventDefault());
+// after a page reload, a phone that was already set up wakes on the always-on display
+let LOAD=true;setTimeout(()=>{LOAD=false},9000);
+const _g=go;go=function(s){if(LOAD&&s=='lock'&&state!='aod'){let u=0;try{u=localStorage.getItem('unboxed')}catch(e){}if(u)s='aod'}_g(s)};
+})();
 </script></body></html>
