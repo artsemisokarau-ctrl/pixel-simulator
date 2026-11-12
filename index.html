@@ -2983,4 +2983,12 @@ scr.addEventListener('pointerdown',e=>{if(e.pointerType=='mouse')return;const r=
 scr.addEventListener('pointermove',e=>{if(!g)return;const d=(e.clientY-g.y)/g.k;if(g.t=='sd'&&d>40){shade(1);g=null}else if(g.t=='su'&&d<-50){shade(0);g=null}else if(g.t=='dd'&&d>60){drawer(0);g=null}},true);
 ['pointerup','pointercancel'].forEach(t=>scr.addEventListener(t,()=>{g=null},true));
 })();
+// ===== MEGA PACK 16: keep the phone inside the iPhone safe area =====
+(function(){
+const pr=document.createElement('div');pr.style.cssText='position:fixed;top:0;left:0;width:0;height:env(safe-area-inset-top);visibility:hidden;pointer-events:none';document.body.appendChild(pr);
+const _a=apply3D;apply3D=function(){_a();if(!isMob())return;const w=document.querySelector('.wrap'),ph=document.querySelector('.ph');if(!w||!ph)return;
+ const top=Math.max(pr.offsetHeight||0,20),avail=innerHeight-2*top-8,need=ph.offsetHeight+14,m=w.style.transform.match(/scale\(([\d.]+)\)/);if(!m)return;
+ const f=Math.min(1,avail/(need*parseFloat(m[1])));if(f<1)w.style.transform=w.style.transform.replace(/scale\([\d.]+\)/,'scale('+(parseFloat(m[1])*f)+')')};
+window.addEventListener('resize',()=>apply3D());apply3D();
+})();
 </script></body></html>
