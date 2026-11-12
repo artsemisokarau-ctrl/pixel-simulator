@@ -3056,4 +3056,33 @@ $('bpw').addEventListener('pointerdown',e=>{e.preventDefault();held=1;pw.dispatc
 const up=()=>{if(!held)return;held=0;pw.dispatchEvent(new PointerEvent('pointerup',{bubbles:true}));pw.click()};
 $('bpw').addEventListener('pointerup',up);$('bpw').addEventListener('pointercancel',up);$('bpw').addEventListener('contextmenu',e=>e.preventDefault());
 })();
+// ===== MEGA PACK 21: Samsung Galaxy Z Fold 8 (skin of the foldable) =====
+(function(){
+let ZF=false;try{ZF=localStorage.getItem('zf')=='1'}catch(e){}
+const c=document.createElement('style');c.textContent=`
+.zcam{display:none}
+.zf.d11f .v11{display:none!important}.zf.d11f .zcam{display:block}
+.zf.d11f .ph{box-shadow:0 0 0 2px #d6d8dd,0 0 0 4px #858992,0 40px 80px #000a!important}
+.zf.d11f .btn{background:#bfc2c8!important}
+.zf.d11f .back{background:linear-gradient(160deg,#41527a,#27314d 58%,#1b2238)!important}
+.zf.d11f .back .logo{color:#c9d3ee;opacity:.8;letter-spacing:.32em;font-weight:600}
+.zf.d11f .back .breg{color:#fff}
+.zf.d11f #boot svg{display:none}
+.zf.d11f #boot:before{content:"SAMSUNG";color:#fff;font-weight:700;letter-spacing:.34em;font-size:20px;margin-bottom:6px}
+.zf.d11f #boot .pw{opacity:.7}
+.zcam .lens{width:46px;height:46px}
+.zcam .zl{position:absolute;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle,#fff6dc 0 35%,#d9c98c 60%,#2a2515);box-shadow:0 0 0 2px #17171a,0 0 0 3px #5b5d63}
+.zcam .zs{position:absolute;width:6px;height:6px;border-radius:50%;background:#000;box-shadow:0 0 0 1px #62646c}`;document.head.appendChild(c);
+document.querySelector('.back').insertAdjacentHTML('beforeend','<div class="zcam"><div class="lens" style="left:26px;top:28px"></div><div class="lens" style="left:26px;top:88px"></div><div class="lens" style="left:26px;top:148px"></div><div class="zl" style="left:88px;top:34px"></div><div class="zs" style="left:92px;top:62px"></div><div class="zs" style="left:92px;top:100px"></div></div>');
+const dev=document.querySelector('.dev[data-d="d11f"]');
+const card=dev.cloneNode(true);card.dataset.z='1';card.dataset.n='Samsung Galaxy Z Fold 8';card.querySelector('b').textContent='Galaxy Z Fold 8';card.querySelector('small').textContent='Samsung · foldable';card.classList.remove('on');dev.after(card);
+const po=dev.onclick;dev.onclick=()=>{ZF=false;try{localStorage.setItem('zf','0')}catch(e){}po&&po()};
+card.onclick=()=>{ZF=true;try{localStorage.setItem('zf','1')}catch(e){}if(DEV=='d11f')zfApply();setDev('d11f')};
+function zfApply(){const z=ZF&&DEV=='d11f';document.body.classList.toggle('zf',z);
+ DN.d11f=z?'Samsung Galaxy Z Fold 8':'Pixel 11 Pro Fold';INFO.d11f=z?'Foldable · 6.5" cover / 8.0" inner · side fingerprint in power key · Snapdragon 8 Elite':'Foldable · 6.4" cover / 8" inner · side fingerprint in power key · Tensor';
+ if(DEV=='d11f'){document.title=DN.d11f+' Sim';$('dinfo').textContent=INFO.d11f;if(z){const l=$('blogo');l.textContent='SAMSUNG';l.style.fontSize='17px'}}
+ document.querySelectorAll('.dev').forEach(e=>{if(e.dataset.d=='d11f')e.classList.toggle('on',(e.dataset.z=='1')==z)})}
+const _s=setDev;setDev=function(d,o){_s(d,o);zfApply()};
+zfApply();
+})();
 </script></body></html>
