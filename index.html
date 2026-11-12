@@ -3161,4 +3161,6 @@ function gemini(){if(state!='home'&&state!='lock'){toast('Wake the phone first')
 gb.onclick=gemini;window.gemini=gemini;
 const mb=document.getElementById('mbar');if(mb){const b=document.createElement('button');b.id='bgm';b.innerHTML=GS;b.onclick=gemini;mb.insertBefore(b,document.getElementById('bpw'))}
 })();
+// ===== MEGA PACK 23: phone bottom bar removed =====
+(function(){const c=document.createElement('style');c.textContent='@media (max-width:760px),(pointer:coarse) and (max-width:1000px){#mbar{display:none!important}.ph{height:100dvh!important;padding-bottom:env(safe-area-inset-bottom)!important}}';document.head.appendChild(c)})();
 </script></body></html>
