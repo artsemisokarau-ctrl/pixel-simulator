@@ -2973,4 +2973,14 @@ function gearUI(){pane.innerHTML=`<h4>🛡 Case</h4>${chips([['none','None'],['c
 window.GR={cs:k=>{G.case=k;save();caseUI();if(k!='none')trophy('case1');gearUI()},cc:c=>{G.cc=c;save();caseUI();gearUI()},sn:k=>{G.snap=k;save();snapUI();if(k!='none'){trophy('snap1');snd(180,.12,.16,'square')}gearUI()},wt:()=>watchSet(!G.watch),wf:k=>{G.wface=+k;save();watchDraw();gearUI()},find:()=>{watchBuzz('📍 Phone is looking for you!');snd(1000,.1,.1)},bd:()=>{G.buds=G.buds=='off'?'open':G.buds=='open'?'closed':'open';save();snd(520,.05,.1,'square');budsUI();gearUI()},bx:()=>{G.buds='off';save();budsUI();gearUI()},an:k=>{G.anc=k;save();budsUI();gearUI()},dc:()=>{NET.buds=false;try{netSave()}catch(x){}budsUI();gearUI()}};
 if(!G.bi){G.bi=1;NET.buds=false;try{netSave()}catch(e){}save()}caseUI();snapUI();watchDraw();pw.classList.toggle('off',!G.watch);budsUI();
 })();
+// ===== MEGA PACK 15: touch fixes (swipe down for quick settings), mobile cleanup =====
+(function(){
+const c=document.createElement('style');c.textContent=`#home,#lock,#aod,#pull,#shade,#drawer .hdl,#drawer .srch{touch-action:none}.ph>.slit{background:#0004!important}
+@media(max-width:760px),(pointer:coarse) and (max-width:1000px){#pwatch,#pbuds{display:none!important}}`;document.head.appendChild(c);
+const scr=document.querySelector('.scr');let g=null;
+scr.addEventListener('pointerdown',e=>{if(e.pointerType=='mouse')return;const r=scr.getBoundingClientRect(),k=r.width/scr.offsetWidth||1,y=(e.clientY-r.top)/k,sh=$('shade').classList.contains('o'),dr=!$('drawer').classList.contains('off');
+ if(sh)g={t:'su',y:e.clientY,k};else if(dr){if(y<170)g={t:'dd',y:e.clientY,k}}else if((state=='home'||state=='lock')&&$('app').classList.contains('off')&&y<120)g={t:'sd',y:e.clientY,k}},true);
+scr.addEventListener('pointermove',e=>{if(!g)return;const d=(e.clientY-g.y)/g.k;if(g.t=='sd'&&d>40){shade(1);g=null}else if(g.t=='su'&&d<-50){shade(0);g=null}else if(g.t=='dd'&&d>60){drawer(0);g=null}},true);
+['pointerup','pointercancel'].forEach(t=>scr.addEventListener(t,()=>{g=null},true));
+})();
 </script></body></html>
