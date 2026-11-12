@@ -3032,4 +3032,28 @@ scr.addEventListener('pointermove',e=>{if(!g)return;const dy=(e.clientY-g.y)/g.k
 const c=document.createElement('style');c.textContent='#drawer{overflow-y:auto!important;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:110px!important;box-sizing:border-box;touch-action:pan-y}#drawer::-webkit-scrollbar{display:none}#drawer .srch{position:sticky;top:0;z-index:2}';document.head.appendChild(c);
 $('drawer').addEventListener('wheel',e=>e.stopPropagation(),true);
 })();
+// ===== MEGA PACK 20: phone version bottom control bar (swipe down/up, volume, power) =====
+(function(){
+const MQ='(max-width:760px),(pointer:coarse) and (max-width:1000px)';
+const c=document.createElement('style');c.textContent=`#mbar{display:none}
+@media ${MQ}{
+ #mkeys{display:none!important}
+ .ph{height:calc(100dvh - 58px - env(safe-area-inset-bottom))!important;padding-bottom:0!important}
+ #mbar{display:flex;position:fixed;left:0;right:0;bottom:0;height:calc(58px + env(safe-area-inset-bottom));padding:0 10px env(safe-area-inset-bottom);box-sizing:border-box;background:#000;z-index:1002;justify-content:space-around;align-items:center}
+ #mbar button{width:48px;height:42px;border-radius:21px;border:0;background:#ffffff1f;color:#fff;display:grid;place-items:center;padding:0;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+ #mbar button:active{background:#ffffff55;transform:scale(.92)}
+ #mbar svg{width:22px;fill:#fff}
+}`;document.head.appendChild(c);
+const sv=p=>`<svg viewBox="0 0 24 24"><path d="${p}"/></svg>`;
+const b=document.createElement('div');b.id='mbar';
+b.innerHTML=`<button id="bdn" title="Swipe down: quick settings">${sv('M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z')}</button><button id="bup" title="Swipe up: apps / unlock">${sv('M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6z')}</button><button id="bvd">${sv('M18.5 12A4.5 4.5 0 0 0 16 8v8a4.47 4.47 0 0 0 2.5-4zM5 9v6h4l5 5V4L9 9H5z')}</button><button id="bvu">${sv('M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z')}</button><button id="bpw">${sv('M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z')}</button>`;
+document.body.appendChild(b);
+$('bdn').onclick=()=>{if($('shade').classList.contains('o'))shade(0);else if(state=='home'||state=='lock'){if(!$('drawer').classList.contains('off'))drawer(0);$('app').classList.add('off');shade(1)}};
+$('bup').onclick=()=>{if($('shade').classList.contains('o'))return shade(0);if(state=='home'){if($('app').classList.contains('off'))drawer($('drawer').classList.contains('off')?1:0);else $('bar').click()}else if(state=='lock'){if(LOCK&&LOCK.type!='none')pinUI(1);else go('home')}else if(state=='aod')go('lock')};
+$('bvu').onclick=()=>vol(1);$('bvd').onclick=()=>vol(-1);
+const pw=$('pwr');let held=0;
+$('bpw').addEventListener('pointerdown',e=>{e.preventDefault();held=1;pw.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true}))});
+const up=()=>{if(!held)return;held=0;pw.dispatchEvent(new PointerEvent('pointerup',{bubbles:true}));pw.click()};
+$('bpw').addEventListener('pointerup',up);$('bpw').addEventListener('pointercancel',up);$('bpw').addEventListener('contextmenu',e=>e.preventDefault());
+})();
 </script></body></html>
